@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Dzin</string>
+    <string name="start_time">Начало</string>
+    <string name="stop_time">Окончание</string>
+    <string name="next_time">Следующее время срабатывания</string>
+    <string name="period">Период</string>
+    <string name="is_active">Активен</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+</resources>
