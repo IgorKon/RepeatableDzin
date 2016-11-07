@@ -15,15 +15,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/container"
+        android:weightSum="1"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:weightSum="1">
+        android:layout_alignParentStart="true">
 
         <TimePicker
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/time_picker"
-            android:layout_weight="0.34" />
+            android:layout_weight="0.34"
+            android:timePickerMode="spinner" />
 
         <LinearLayout
             android:orientation="horizontal"
@@ -41,14 +42,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/button_cancel_time_picker"
-                android:layout_weight="0.08" />
+                android:layout_weight="0.08"
+                android:onClick="onCancel" />
 
             <Button
                 android:text="@string/ok"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/button"
-                android:layout_weight="0.08" />
+                android:layout_weight="0.08"
+                android:onClick="onOK" />
         </LinearLayout>
 
     </LinearLayout>
