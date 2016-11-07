@@ -55,7 +55,7 @@
         android:textStyle="normal|bold"
         android:textSize="18sp" />
 
-    <TextClock
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/StartTextValue"
@@ -65,7 +65,7 @@
         android:layout_centerHorizontal="true"
         android:onClick="onStartClick" />
 
-    <TextClock
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/StopTextValue"
@@ -74,7 +74,7 @@
         android:layout_alignStart="@+id/StartTextValue"
         android:textSize="18sp" />
 
-    <TextClock
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/PeriodTextValue"
