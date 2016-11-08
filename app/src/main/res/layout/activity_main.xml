@@ -10,149 +10,160 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="ru.iconstanta.dzin.MainActivity">
 
-    <Switch
-        android:text="@string/is_active"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/ActiveSwitch"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:checked="true"
-        android:onClick="onActiveChanged"
-        android:textStyle="normal|bold"
-        android:textSize="18sp"
-        android:layout_alignEnd="@+id/button2" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/StartTextValue"
-        android:textSize="18sp"
-        android:layout_alignBaseline="@+id/StartTextLabel"
-        android:layout_alignBottom="@+id/StartTextLabel"
-        android:layout_centerHorizontal="true"
-        android:onClick="onStartClick"
-        tools:text="111" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/StopTextValue"
-        android:layout_alignBaseline="@+id/StopTextLabel"
-        android:layout_alignBottom="@+id/StopTextLabel"
-        android:layout_alignStart="@+id/StartTextValue"
-        android:textSize="18sp"
-        android:onClick="onStopClick"
-        tools:text="111" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/PeriodTextValue"
-        android:layout_alignBaseline="@+id/PeriodTextLabel"
-        android:layout_alignBottom="@+id/PeriodTextLabel"
-        android:layout_alignStart="@+id/StopTextValue"
-        android:textSize="18sp"
-        android:onClick="onPeriodClicke"
-        tools:text="111" />
-
-    <TextView
-        android:text="@string/rest"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="24dp"
-        android:id="@+id/textView2"
-        android:textSize="18sp"
-        android:textStyle="normal|bold"
-        android:textColor="?attr/colorPrimary" />
-
-    <TextView
-        android:text="@string/next_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:id="@+id/textView"
-        android:textSize="18sp"
-        android:textStyle="normal|bold"
-        android:layout_below="@+id/ActiveSwitch"
-        android:layout_alignParentStart="true"
-        android:textColor="?attr/colorPrimary" />
 
     <Button
         android:text="@string/restart"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/button2"
-        android:layout_marginTop="22dp"
-        android:layout_below="@+id/textView2"
-        android:layout_alignStart="@+id/StartTextLabel"
-        android:layout_toStartOf="@+id/StartTextValue"
-        style="@style/Widget.AppCompat.Button.Borderless" />
-
-    <Switch
-        android:text="@string/sound"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/StartButton"
         android:layout_alignParentTop="true"
-        android:id="@+id/SoundSwitch"
-        android:layout_alignParentEnd="true"
-        android:textSize="18sp"
-        android:textStyle="normal|bold"
-        android:layout_toEndOf="@+id/textView3" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/start_time"
-        android:id="@+id/StartTextLabel"
-        android:textSize="18sp"
-        android:textStyle="normal|bold"
-        android:layout_centerVertical="true"
-        android:layout_alignParentStart="true" />
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/StartButton"
+        android:layout_alignParentStart="true">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/period"
-        android:id="@+id/PeriodTextLabel"
-        android:textStyle="normal|bold"
-        android:textSize="18sp"
-        android:layout_marginTop="21dp"
-        android:layout_below="@+id/StopTextLabel"
-        android:layout_alignParentStart="true" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_gravity="left"
+            android:layout_height="match_parent"
+            android:id="@+id/Left">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/stop_time"
-        android:id="@+id/StopTextLabel"
-        android:textStyle="normal|bold"
-        android:textSize="18sp"
-        android:layout_marginTop="21dp"
-        android:layout_below="@+id/StartTextLabel"
-        android:layout_alignParentStart="true" />
+            <Switch
+                android:text="@string/is_active"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/ActiveSwitch"
+                android:checked="true"
+                android:onClick="onActiveChanged"
+                android:textStyle="normal|bold"
+                android:textSize="18sp" />
 
-    <TextView
-        android:text="TextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView3"
-        android:textSize="18sp"
-        tools:text="111"
-        android:layout_alignBaseline="@+id/textView"
-        android:layout_alignBottom="@+id/textView"
-        android:layout_toEndOf="@+id/ActiveSwitch" />
+            <TextView
+                android:text="@string/next_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView10"
+                android:textSize="18sp"
+                android:textStyle="normal|bold"
+                android:layout_marginTop="15dp"
+                android:textColor="?attr/colorPrimaryDark" />
 
-    <TextView
-        android:text="TextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView4"
-        android:textSize="18sp"
-        tools:text="111"
-        android:layout_above="@+id/button2"
-        android:layout_toEndOf="@+id/button2" />
+            <TextView
+                android:text="@string/rest"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView12"
+                android:textSize="18sp"
+                android:textStyle="normal|bold"
+                android:layout_marginTop="15dp"
+                android:textColor="?attr/colorPrimaryDark" />
+
+            <TextView
+                android:text="@string/start_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/StartTextLabel"
+                android:textStyle="normal|bold"
+                android:textSize="18sp"
+                android:layout_marginTop="35dp"/>
+
+            <TextView
+                android:text="@string/stop_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/StopTextLabel"
+                android:textSize="18sp"
+                android:textStyle="normal|bold"
+                android:layout_marginTop="15dp"/>
+
+            <TextView
+                android:text="@string/period"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/PeriodTextLabel"
+                android:textSize="18sp"
+                android:textStyle="normal|bold"
+                android:layout_marginTop="15dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_gravity="right"
+            android:layout_height="match_parent"
+            android:id="@+id/Right"
+            android:layout_marginLeft="25dp">
+
+            <Switch
+                android:text="@string/sound"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/SoundSwitch"
+                android:textSize="18sp"
+                android:textStyle="normal|bold" />
+
+            <TextView
+                android:text="TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView11"
+                android:textSize="18sp"
+                android:textStyle="normal|bold"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/colorPrimaryDark" />
+
+            <TextView
+                android:text="TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView13"
+                android:textSize="18sp"
+                android:textStyle="normal|bold"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/colorPrimaryDark" />
+
+            <TextView
+                android:text="TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/StartTextValue"
+                android:textSize="18sp"
+                android:textStyle="normal|bold"
+                android:layout_marginTop="35dp"
+                android:onClick="onStartClick" />
+
+            <TextView
+                android:text="TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/StopTextValue"
+                android:textSize="18sp"
+                android:textStyle="normal|bold"
+                android:layout_marginTop="15dp"
+                android:onClick="onStopClick" />
+
+            <TextView
+                android:text="TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/PeriodTextValue"
+                android:textSize="18sp"
+                android:textStyle="normal|bold"
+                android:layout_marginTop="15dp"
+                android:onClick="onPeriodClicke" />
+        </LinearLayout>
+
+    </LinearLayout>
 
 </RelativeLayout>
