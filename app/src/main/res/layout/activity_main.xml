@@ -20,40 +20,8 @@
         android:checked="true"
         android:onClick="onActiveChanged"
         android:textStyle="normal|bold"
-        android:textSize="18sp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/start_time"
-        android:id="@+id/StartTextLabel"
-        android:layout_marginTop="12dp"
-        android:layout_below="@+id/ActiveSwitch"
-        android:layout_alignParentStart="true"
         android:textSize="18sp"
-        android:textStyle="normal|bold" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/period"
-        android:id="@+id/PeriodTextLabel"
-        android:layout_marginTop="22dp"
-        android:layout_below="@+id/StopTextLabel"
-        android:layout_alignParentStart="true"
-        android:textStyle="normal|bold"
-        android:textSize="18sp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/stop_time"
-        android:id="@+id/StopTextLabel"
-        android:layout_marginTop="19dp"
-        android:layout_below="@+id/StartTextLabel"
-        android:layout_alignParentStart="true"
-        android:textStyle="normal|bold"
-        android:textSize="18sp" />
+        android:layout_alignEnd="@+id/button2" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -63,7 +31,8 @@
         android:layout_alignBaseline="@+id/StartTextLabel"
         android:layout_alignBottom="@+id/StartTextLabel"
         android:layout_centerHorizontal="true"
-        android:onClick="onStartClick" />
+        android:onClick="onStartClick"
+        tools:text="111" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -73,7 +42,8 @@
         android:layout_alignBottom="@+id/StopTextLabel"
         android:layout_alignStart="@+id/StartTextValue"
         android:textSize="18sp"
-        android:onClick="onStopClick" />
+        android:onClick="onStopClick"
+        tools:text="111" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -83,6 +53,106 @@
         android:layout_alignBottom="@+id/PeriodTextLabel"
         android:layout_alignStart="@+id/StopTextValue"
         android:textSize="18sp"
-        android:onClick="onPeriodClicke" />
+        android:onClick="onPeriodClicke"
+        tools:text="111" />
+
+    <TextView
+        android:text="@string/rest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="24dp"
+        android:id="@+id/textView2"
+        android:textSize="18sp"
+        android:textStyle="normal|bold"
+        android:textColor="?attr/colorPrimary" />
+
+    <TextView
+        android:text="@string/next_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:id="@+id/textView"
+        android:textSize="18sp"
+        android:textStyle="normal|bold"
+        android:layout_below="@+id/ActiveSwitch"
+        android:layout_alignParentStart="true"
+        android:textColor="?attr/colorPrimary" />
+
+    <Button
+        android:text="@string/restart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button2"
+        android:layout_marginTop="22dp"
+        android:layout_below="@+id/textView2"
+        android:layout_alignStart="@+id/StartTextLabel"
+        android:layout_toStartOf="@+id/StartTextValue"
+        style="@style/Widget.AppCompat.Button.Borderless" />
+
+    <Switch
+        android:text="@string/sound"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:id="@+id/SoundSwitch"
+        android:layout_alignParentEnd="true"
+        android:textSize="18sp"
+        android:textStyle="normal|bold"
+        android:layout_toEndOf="@+id/textView3" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/start_time"
+        android:id="@+id/StartTextLabel"
+        android:textSize="18sp"
+        android:textStyle="normal|bold"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/period"
+        android:id="@+id/PeriodTextLabel"
+        android:textStyle="normal|bold"
+        android:textSize="18sp"
+        android:layout_marginTop="21dp"
+        android:layout_below="@+id/StopTextLabel"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/stop_time"
+        android:id="@+id/StopTextLabel"
+        android:textStyle="normal|bold"
+        android:textSize="18sp"
+        android:layout_marginTop="21dp"
+        android:layout_below="@+id/StartTextLabel"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView3"
+        android:textSize="18sp"
+        tools:text="111"
+        android:layout_alignBaseline="@+id/textView"
+        android:layout_alignBottom="@+id/textView"
+        android:layout_toEndOf="@+id/ActiveSwitch" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView4"
+        android:textSize="18sp"
+        tools:text="111"
+        android:layout_above="@+id/button2"
+        android:layout_toEndOf="@+id/button2" />
 
 </RelativeLayout>
