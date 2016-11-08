@@ -72,7 +72,8 @@
         android:layout_alignBaseline="@+id/StopTextLabel"
         android:layout_alignBottom="@+id/StopTextLabel"
         android:layout_alignStart="@+id/StartTextValue"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:onClick="onStopClick" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -81,6 +82,7 @@
         android:layout_alignBaseline="@+id/PeriodTextLabel"
         android:layout_alignBottom="@+id/PeriodTextLabel"
         android:layout_alignStart="@+id/StopTextValue"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:onClick="onPeriodClicke" />
 
 </RelativeLayout>

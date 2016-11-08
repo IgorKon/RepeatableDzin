@@ -25,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
     public static final String APP_PREFERENCES_PeriodHour = "PeriodHour";
     public static final String APP_PREFERENCES_PeriodMinute = "PeriodMinute";
     private static final int START_TIME_PICKER = 0;
+    private static final int STOP_TIME_PICKER = 1;
+    private static final int PERIOD_TIME_PICKER = 2;
 
     private boolean mIsActive;
 
@@ -38,7 +40,10 @@ public class MainActivity extends AppCompatActivity {
 
     private int mStartHour;
     private int mStartMinute;
-    private Time mStopTime;
+    private int mStopHour;
+    private int mStopMinute;
+    private int mPeriodHour;
+    private int mPeriodMinute;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,46 +58,55 @@ public class MainActivity extends AppCompatActivity {
         mStopTextClock = (TextView) findViewById(R.id.StopTextValue);
         mPeriodTextLabel = (TextView) findViewById(R.id.PeriodTextLabel);
         mPeriodTextClock = (TextView) findViewById(R.id.PeriodTextValue);
-    }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (mSettings.contains(APP_PREFERENCES_IsActive)) {
-            // Получаем число из настроек
-            mIsActive = mSettings.getBoolean(APP_PREFERENCES_IsActive, true);
-
-            mStartHour = mSettings.getInt(APP_PREFERENCES_StartHour, 13);
-            mStartMinute = mSettings.getInt(APP_PREFERENCES_StartMinute, 0);
-            // Выводим на экран данные из настроек
-            mActiveSwitch.setChecked(mIsActive);
-            mStartTextClock.setText(mStartHour + ":" + mStartMinute);
-            SetEnabled();
-        }
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-
-        SharedPreferences.Editor editor = mSettings.edit();
-        editor.putBoolean(APP_PREFERENCES_IsActive, mIsActive);
-        editor.putInt(APP_PREFERENCES_StartHour, mStartHour);
-        editor.putInt(APP_PREFERENCES_StartMinute, mStartMinute);
-        editor.apply();
+        RestoreFromSettings();
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        String sTime;
         if (requestCode == START_TIME_PICKER) {
             if (resultCode == RESULT_OK) {
                 mStartHour = data.getIntExtra(MainActivity.APP_Hour, 13);
                 mStartMinute = data.getIntExtra(MainActivity.APP_Minute, 0);
-                String sStartTime = mStartHour + ":" + mStartMinute;
-                mStartTextClock.setText(sStartTime);
+                sTime = mStartHour + ":" + mStartMinute;
+                mStartTextClock.setText(sTime);
             }
         }
+        else
+        {
+            if (requestCode == STOP_TIME_PICKER) {
+                if (resultCode == RESULT_OK) {
+                    mStopHour = data.getIntExtra(MainActivity.APP_Hour, 23);
+                    mStopMinute = data.getIntExtra(MainActivity.APP_Minute, 0);
+                    sTime = mStopHour + ":" + mStopMinute;
+                    mStopTextClock.setText(sTime);
+                }
+            }
+            else {
+                if (requestCode == PERIOD_TIME_PICKER) {
+                    if (resultCode == RESULT_OK) {
+                        mPeriodHour = data.getIntExtra(MainActivity.APP_Hour, 1);
+                        mPeriodMinute = data.getIntExtra(MainActivity.APP_Minute, 0);
+                        sTime = mPeriodHour + ":" + mPeriodMinute;
+                        mPeriodTextClock.setText(sTime);
+                    }
+                }
+            }
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        StoreToSettings();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        StoreToSettings();
     }
 
     public void onActiveChanged(View view) {
@@ -106,6 +120,53 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra(MainActivity.APP_Minute, mStartMinute);
         startActivityForResult(intent, START_TIME_PICKER);
     }
+    public void onStopClick(View view) {
+        Intent intent = new Intent(MainActivity.this, TimePickerActivity.class);
+        intent.putExtra(MainActivity.APP_Hour, mStopHour);
+        intent.putExtra(MainActivity.APP_Minute, mStopMinute);
+        startActivityForResult(intent, STOP_TIME_PICKER);
+    }
+
+    public void onPeriodClicke(View view) {
+        Intent intent = new Intent(MainActivity.this, TimePickerActivity.class);
+        intent.putExtra(MainActivity.APP_Hour, mPeriodHour);
+        intent.putExtra(MainActivity.APP_Minute, mPeriodMinute);
+        startActivityForResult(intent, PERIOD_TIME_PICKER);
+    }
+
+    protected void StoreToSettings()
+    {
+        SharedPreferences.Editor editor = mSettings.edit();
+        editor.putBoolean(APP_PREFERENCES_IsActive, mIsActive);
+        editor.putInt(APP_PREFERENCES_StartHour, mStartHour);
+        editor.putInt(APP_PREFERENCES_StartMinute, mStartMinute);
+        editor.putInt(APP_PREFERENCES_StopHour, mStopHour);
+        editor.putInt(APP_PREFERENCES_StopMinute, mStopMinute);
+        editor.putInt(APP_PREFERENCES_PeriodHour, mPeriodHour);
+        editor.putInt(APP_PREFERENCES_PeriodMinute, mPeriodMinute);
+        editor.apply();
+    }
+
+    protected void RestoreFromSettings()
+    {
+        if (mSettings.contains(APP_PREFERENCES_IsActive)) {
+            // Получаем число из настроек
+            mIsActive = mSettings.getBoolean(APP_PREFERENCES_IsActive, true);
+
+            mStartHour = mSettings.getInt(APP_PREFERENCES_StartHour, 13);
+            mStartMinute = mSettings.getInt(APP_PREFERENCES_StartMinute, 0);
+            mStopHour = mSettings.getInt(APP_PREFERENCES_StopHour, 23);
+            mStopMinute = mSettings.getInt(APP_PREFERENCES_StopMinute, 0);
+            mPeriodHour = mSettings.getInt(APP_PREFERENCES_PeriodHour, 1);
+            mPeriodMinute = mSettings.getInt(APP_PREFERENCES_PeriodMinute, 0);
+            // Выводим на экран данные из настроек
+            mActiveSwitch.setChecked(mIsActive);
+            mStartTextClock.setText(mStartHour + ":" + mStartMinute);
+            mStopTextClock.setText(mStopHour + ":" + mStopMinute);
+            mPeriodTextClock.setText(mPeriodHour + ":" + mPeriodMinute);
+            SetEnabled();
+        }
+    }
 
     protected void SetEnabled() {
         mStartTextLabel.setEnabled(mIsActive);
@@ -115,4 +176,5 @@ public class MainActivity extends AppCompatActivity {
         mPeriodTextLabel.setEnabled(mIsActive);
         mPeriodTextClock.setEnabled(mIsActive);
     }
+
 }
