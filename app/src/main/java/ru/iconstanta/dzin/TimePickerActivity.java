@@ -17,10 +17,11 @@ public class TimePickerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_time_picker);
+
         mTimePicker = (TimePicker) findViewById(R.id.time_picker);
         mTimePicker.setIs24HourView(true);
-        mHour = getIntent().getExtras().getInt("Hour");
-        mMinute = getIntent().getExtras().getInt("Minute");
+        mHour = getIntent().getExtras().getInt(MainActivity.APP_Hour);
+        mMinute = getIntent().getExtras().getInt(MainActivity.APP_Minute);
 
         mTimePicker.setCurrentHour(mHour);
         mTimePicker.setCurrentMinute(mMinute);
@@ -35,8 +36,8 @@ public class TimePickerActivity extends AppCompatActivity {
         mHour = mTimePicker.getCurrentHour();
         mMinute= mTimePicker.getCurrentMinute();
         Intent answerIntent = new Intent();
-        answerIntent.putExtra("Hour", mHour);
-        answerIntent.putExtra("Minute", mMinute);
+        answerIntent.putExtra(MainActivity.APP_Hour, mHour);
+        answerIntent.putExtra(MainActivity.APP_Minute, mMinute);
         setResult(RESULT_OK, answerIntent);
         finish();
     }

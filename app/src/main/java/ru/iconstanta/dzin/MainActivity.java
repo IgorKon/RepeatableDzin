@@ -16,6 +16,8 @@ public class MainActivity extends AppCompatActivity {
     private SharedPreferences mSettings;
     public static final String APP_PREFERENCES = "dzin_settings";
     public static final String APP_PREFERENCES_IsActive = "IsActive";
+    public static final String APP_Hour = "Hour";
+    public static final String APP_Minute = "Minute";
     public static final String APP_PREFERENCES_StartHour = "StartHour";
     public static final String APP_PREFERENCES_StartMinute = "StartMinute";
     public static final String APP_PREFERENCES_StopHour = "StopHour";
@@ -34,7 +36,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView mPeriodTextLabel;
     private TextView mPeriodTextClock;
 
-    private Time mStartTime;
+    private int mStartHour;
+    private int mStartMinute;
     private Time mStopTime;
 
     @Override
@@ -50,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
         mStopTextClock = (TextView) findViewById(R.id.StopTextValue);
         mPeriodTextLabel = (TextView) findViewById(R.id.PeriodTextLabel);
         mPeriodTextClock = (TextView) findViewById(R.id.PeriodTextValue);
-        mStartTime = new Time();
     }
 
     @Override
@@ -60,11 +62,11 @@ public class MainActivity extends AppCompatActivity {
             // Получаем число из настроек
             mIsActive = mSettings.getBoolean(APP_PREFERENCES_IsActive, true);
 
-            mStartTime.hour = mSettings.getInt(APP_PREFERENCES_StartHour, 13);
-            mStartTime.minute = mSettings.getInt(APP_PREFERENCES_StartMinute, 0);
+            mStartHour = mSettings.getInt(APP_PREFERENCES_StartHour, 13);
+            mStartMinute = mSettings.getInt(APP_PREFERENCES_StartMinute, 0);
             // Выводим на экран данные из настроек
             mActiveSwitch.setChecked(mIsActive);
-            mStartTextClock.setText(mStartTime.format("%H:%M"));
+            mStartTextClock.setText(mStartHour + ":" + mStartMinute);
             SetEnabled();
         }
     }
@@ -75,8 +77,8 @@ public class MainActivity extends AppCompatActivity {
 
         SharedPreferences.Editor editor = mSettings.edit();
         editor.putBoolean(APP_PREFERENCES_IsActive, mIsActive);
-        editor.putInt(APP_PREFERENCES_StartHour, mStartTime.hour);
-        editor.putInt(APP_PREFERENCES_StartMinute, mStartTime.minute);
+        editor.putInt(APP_PREFERENCES_StartHour, mStartHour);
+        editor.putInt(APP_PREFERENCES_StartMinute, mStartMinute);
         editor.apply();
     }
 
@@ -85,9 +87,10 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == START_TIME_PICKER) {
             if (resultCode == RESULT_OK) {
-                mStartTime.hour = data.getIntExtra("Hour", 13);
-                mStartTime.minute = data.getIntExtra("Minute", 0);
-                mStartTextClock.setText(mStartTime.format("%H:%M"));
+                mStartHour = data.getIntExtra(MainActivity.APP_Hour, 13);
+                mStartMinute = data.getIntExtra(MainActivity.APP_Minute, 0);
+                String sStartTime = mStartHour + ":" + mStartMinute;
+                mStartTextClock.setText(sStartTime);
             }
         }
     }
@@ -99,8 +102,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void onStartClick(View view) {
         Intent intent = new Intent(MainActivity.this, TimePickerActivity.class);
-        intent.putExtra("Hour", mStartTime.hour);
-        intent.putExtra("Minute", mStartTime.minute);
+        intent.putExtra(MainActivity.APP_Hour, mStartHour);
+        intent.putExtra(MainActivity.APP_Minute, mStartMinute);
         startActivityForResult(intent, START_TIME_PICKER);
     }
 
