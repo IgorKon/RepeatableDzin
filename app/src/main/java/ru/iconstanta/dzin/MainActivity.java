@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
     private int mPeriodMinute;
 
     private AlarmManagerBroadcastReceiver mAlarm;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
