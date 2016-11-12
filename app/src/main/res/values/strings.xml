@@ -10,4 +10,6 @@
     <string name="restart">Старт</string>
     <string name="rest">Осталось</string>
     <string name="sound">Звук</string>
+    <string name="next_time_not_defined">Не задано</string>
+    <string name="rest_time_not_defined"></string>
 </resources>

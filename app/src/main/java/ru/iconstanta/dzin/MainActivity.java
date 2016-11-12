@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     private SharedPreferences mSettings;
     public static final String APP_PREFERENCES = "dzin_settings";
     public static final String APP_PREFERENCES_IsActive = "IsActive";
+    public static final String APP_PREFERENCES_IsSoundOn = "IsSoundOn";
     public static final String APP_Hour = "Hour";
     public static final String APP_Minute = "Minute";
     public static final String APP_PREFERENCES_StartHour = "StartHour";
@@ -24,13 +25,16 @@ public class MainActivity extends AppCompatActivity {
     public static final String APP_PREFERENCES_StopMinute = "StopMinute";
     public static final String APP_PREFERENCES_PeriodHour = "PeriodHour";
     public static final String APP_PREFERENCES_PeriodMinute = "PeriodMinute";
+
     private static final int START_TIME_PICKER = 0;
     private static final int STOP_TIME_PICKER = 1;
     private static final int PERIOD_TIME_PICKER = 2;
 
     private boolean mIsActive;
+    private boolean mIsSoundOn;
 
     private Switch mActiveSwitch;
+    private Switch mSoundSwitch;
     private TextView mStartTextLabel;
     private TextView mStartTextClock;
     private TextView mStopTextLabel;
@@ -45,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
     private int mPeriodHour;
     private int mPeriodMinute;
 
+    private AlarmManagerBroadcastReceiver mAlarm;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,12 +57,15 @@ public class MainActivity extends AppCompatActivity {
 
         mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         mActiveSwitch = (Switch) findViewById(R.id.ActiveSwitch);
+        mSoundSwitch = (Switch) findViewById(R.id.SoundSwitch);
         mStartTextLabel = (TextView) findViewById(R.id.StartTextLabel);
         mStartTextClock = (TextView) findViewById(R.id.StartTextValue);
         mStopTextLabel = (TextView) findViewById(R.id.StopTextLabel);
         mStopTextClock = (TextView) findViewById(R.id.StopTextValue);
         mPeriodTextLabel = (TextView) findViewById(R.id.PeriodTextLabel);
         mPeriodTextClock = (TextView) findViewById(R.id.PeriodTextValue);
+
+        mAlarm = new AlarmManagerBroadcastReceiver();
 
         RestoreFromSettings();
     }
@@ -138,6 +146,7 @@ public class MainActivity extends AppCompatActivity {
     {
         SharedPreferences.Editor editor = mSettings.edit();
         editor.putBoolean(APP_PREFERENCES_IsActive, mIsActive);
+        editor.putBoolean(APP_PREFERENCES_IsSoundOn, mIsSoundOn);
         editor.putInt(APP_PREFERENCES_StartHour, mStartHour);
         editor.putInt(APP_PREFERENCES_StartMinute, mStartMinute);
         editor.putInt(APP_PREFERENCES_StopHour, mStopHour);
@@ -152,6 +161,7 @@ public class MainActivity extends AppCompatActivity {
         if (mSettings.contains(APP_PREFERENCES_IsActive)) {
             // Получаем число из настроек
             mIsActive = mSettings.getBoolean(APP_PREFERENCES_IsActive, true);
+            mIsSoundOn = mSettings.getBoolean(APP_PREFERENCES_IsSoundOn, true);
 
             mStartHour = mSettings.getInt(APP_PREFERENCES_StartHour, 13);
             mStartMinute = mSettings.getInt(APP_PREFERENCES_StartMinute, 0);
@@ -161,6 +171,7 @@ public class MainActivity extends AppCompatActivity {
             mPeriodMinute = mSettings.getInt(APP_PREFERENCES_PeriodMinute, 0);
             // Выводим на экран данные из настроек
             mActiveSwitch.setChecked(mIsActive);
+            mSoundSwitch.setChecked(mIsSoundOn);
             mStartTextClock.setText(mStartHour + ":" + mStartMinute);
             mStopTextClock.setText(mStopHour + ":" + mStopMinute);
             mPeriodTextClock.setText(mPeriodHour + ":" + mPeriodMinute);
@@ -177,4 +188,10 @@ public class MainActivity extends AppCompatActivity {
         mPeriodTextClock.setEnabled(mIsActive);
     }
 
+    public void onSrartButtonClick(View view) {
+        Context context= this.getApplicationContext();
+        if( mAlarm != null){
+            mAlarm.setOnetimeTimer(context);
+        }
+    }
 }
