@@ -22,10 +22,10 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
-        PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "YOUR TAG");
+        //PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
+        //PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "DZIN");
 //Осуществляем блокировку
-        wl.acquire();
+        //wl.acquire();
 
 //Здесь можно делать обработку.
         Bundle extras = intent.getExtras();
@@ -42,7 +42,7 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
         Toast.makeText(context, msgStr, Toast.LENGTH_LONG).show();
 
 //Разблокируем поток.
-        wl.release();
+        //wl.release();
     }
 
     public void setOnetimeTimer(Context context){
